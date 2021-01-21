@@ -13,7 +13,7 @@ function getEntities(req, res) {
     function getAll(token, callback) {
       const query = new azure.TableQuery()
 
-      tableService.queryEntities('weatherdata', query, token, (error, result, response) => {
+      tableService.queryEntities('data', query, token, (error, result, response) => {
         if (response.statusCode === 200) {
           data.push(result.entries)
 
