@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="theme-color" content="#fafafa" />
+  </head>
+
+  <body onload="getEntities()">
+    <script>
+      const apiBaseUrl = 'add'
+
+      async function getEntities() {
+        let loading = `<div class="thermometer-loading">data is loading...</div>`
+        document.getElementById('thermometer-data').innerHTML = loading
+
+        await fetch(`${apiBaseUrl}api/get`)
+          .then((response) => response.json())
+          .then((data) => {
+            let renderResult = ``
+
+            data.forEach((obj) => {
+              const { Temperature, Humidity, Pressure, Battery } = obj
+              renderResult += `
+                <tbody>
+                  <tr>
+                    <td>${Temperature} &deg;C</td>
+                    <td>${Humidity} %</td>
+                    <td>${Pressure} hPa</td>
+                    <td>${Battery} mV</td>
+                  </tr>
+                </tbody>
+              `
+              document.getElementById('thermometer-data').innerHTML = renderResult
+            })
+          })
+          .catch((error) => console.error(`Error when trying to fetch data from storage: ${error}`))
+      }
+    </script>
+    <div class="container">
+      <h1><u>indoor thermometer data</u></h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Battery</th>
+          </tr>
+        </thead>
+        <tbody id="thermometer-data"></tbody>
+      </table>
+    </div>
+  </body>
+</html>

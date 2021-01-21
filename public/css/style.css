@@ -1,0 +1,34 @@
+/* 
+Light colors:
+    * background #FFFFFF
+    * primary #6200EE
+*/
+
+html {
+  background-color: #121212;
+}
+
+body {
+  color: #bb86fc;
+}
+
+.container {
+  margin-top: 1em;
+}
+
+td,
+th {
+  border-bottom-color: #1f1b24;
+}
+
+/* Larger than mobile screen */
+@media (min-width: 40rem) {
+}
+
+/* Larger than tablet screen */
+@media (min-width: 80rem) {
+}
+
+/* Larger than desktop screen */
+@media (min-width: 120rem) {
+}

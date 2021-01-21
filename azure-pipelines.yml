@@ -1,0 +1,25 @@
+pool:
+  vmImage: 'vs2017-win2016'
+
+trigger:
+  - master
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.14.1'
+  - script: yarn install
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)'
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: $(azureSubscription)
+      appName: 'add'
+      appType: webApp
+      package: '$(System.DefaultWorkingDirectory)'
+      customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'

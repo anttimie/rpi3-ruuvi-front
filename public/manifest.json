@@ -1,0 +1,6 @@
+{
+  "name": "thermometer web",
+  "short_name": "thermometer",
+  "start_url": ".",
+  "display": "browser"
+}
