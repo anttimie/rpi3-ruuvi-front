@@ -17,3 +17,9 @@ Nothing fancy, just for kiosk setup some kind of UI.
 - cd server
 - node server.js
 - navigate to localhost:8080
+
+## Else
+
+---
+
+- controllers\main just a sample to try out
